@@ -11,14 +11,23 @@ puts "----------"
 
 # Your code goes here ...
 
-puts "please provide a store name"
+puts "Create a new store - please provide a store name:"
 @user_input = gets.chomp
 puts @user_input
 
-store10 = Store.create(
-  name: @user_input
-)
-puts store10.errors
+new_store = Store.new(name: @user_input)
+puts new_store
+
+if new_store.save
+  puts "Your store has been created"
+else
+  puts "Sorry, Unable to create store. Error: "
+  new_store.errors.full_messages.each do |error|
+    puts error
+  end
+end
+
+
 
 # 2. Ask the user for a store name (store it in a variable)
 # 3. Attempt to create a store with the inputted name but leave out the other fields (annual_revenue, mens_apparel, and womens_apparel)
